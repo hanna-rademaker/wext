@@ -1,10 +1,15 @@
-workspace = { members = ["examples/counter"] }
+[workspace]
+members = ["examples/counter"]
+
 [package]
 name = "wext"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["Florian Uekermann <florian@uekermann.me>"]
+description = "web-sys extension traits, convenience functions and types"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/CodeGreenGmbH/wext"
+documentation = "https://docs.rs/wext"
 
 [dependencies]
 gloo = "0.11.0"
