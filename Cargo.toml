@@ -1,0 +1,18 @@
+workspace = { members = ["examples/counter"] }
+[package]
+name = "wext"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+gloo = "0.11.0"
+web-sys = { version = "0.3.68", features = [
+    "Document", "Text",
+    "HtmlAnchorElement","HtmlAreaElement","HtmlAudioElement","HtmlBaseElement","HtmlBodyElement","HtmlBrElement","HtmlButtonElement","HtmlCanvasElement","HtmlDListElement","HtmlDataElement","HtmlDataListElement","HtmlDetailsElement","HtmlDialogElement","HtmlDivElement","HtmlElement","HtmlEmbedElement","HtmlFieldSetElement","HtmlFontElement","HtmlFormElement","HtmlFrameElement","HtmlFrameSetElement","HtmlHeadElement","HtmlHeadingElement","HtmlHrElement","HtmlHtmlElement","HtmlIFrameElement","HtmlImageElement","HtmlInputElement","HtmlLabelElement","HtmlLegendElement","HtmlLiElement","HtmlLinkElement","HtmlMapElement","HtmlMediaElement","HtmlMenuElement","HtmlMetaElement","HtmlMeterElement","HtmlModElement","HtmlOListElement","HtmlObjectElement","HtmlOptGroupElement","HtmlOptionElement","HtmlOutputElement","HtmlParagraphElement","HtmlParamElement","HtmlPictureElement","HtmlPreElement","HtmlProgressElement","HtmlQuoteElement","HtmlScriptElement","HtmlSelectElement","HtmlSlotElement","HtmlSourceElement","HtmlSpanElement","HtmlStyleElement","HtmlTableCaptionElement","HtmlTableCellElement","HtmlTableColElement","HtmlTableElement","HtmlTableRowElement","HtmlTableSectionElement","HtmlTemplateElement","HtmlTextAreaElement","HtmlTimeElement","HtmlTitleElement","HtmlTrackElement","HtmlUListElement","HtmlVideoElement",
+] }
+paste = "1.0.14"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.0"
