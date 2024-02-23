@@ -1,6 +1,4 @@
-pub trait HtmlElementExt: AsRef<web_sys::HtmlElement> {}
-
-impl<T> crate::element::ElementExt for T where T: HtmlElementExt {}
+pub trait HtmlElementExt {}
 
 macro_rules! impls {
     ($($names:ident : $( $tagss:ident $($flagss:literal)? ),* );+) => {
@@ -11,7 +9,7 @@ macro_rules! impls {
             use web_sys::wasm_bindgen::JsCast;
             impls!(impl_create_ext -> $($names : $( $tagss $($flagss)? ),* );+);
         }
-        impls!(impl_html_element_ext -> $($names : $( $tagss $($flagss)? ),* );+);
+        impls!(impl_parent_ext_traits -> $($names : $( $tagss $($flagss)? ),* );+);
     };
     ($mac:ident -> $name:ident : $( $tags:ident $($flags:literal)? ),*; $($names:ident : $( $tagss:ident $($flagss:literal)? ),* );+) => {
         impls!($mac -> $name : $( $tags $($flags)? ),*);
@@ -22,10 +20,12 @@ macro_rules! impls {
     };
 }
 
-macro_rules! impl_html_element_ext {
+macro_rules! impl_parent_ext_traits {
     ($name:ident : $( $tags:ident $($flags:literal)? ),*) => {
         paste::paste! {
             impl HtmlElementExt for web_sys::$name {}
+            impl crate::element::ElementExt for web_sys::$name {}
+            impl crate::node::NodeExt for web_sys::$name {}
         }
     };
 }

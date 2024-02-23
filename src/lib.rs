@@ -1,11 +1,13 @@
 pub mod element;
 pub mod html;
+pub mod node;
 pub mod text;
 
 pub mod prelude {
     pub use crate::element::ElementExt as _;
     pub use crate::html::create_ext::*;
     pub use crate::html::HtmlElementExt as _;
+    pub use crate::node::NodeExt as _;
     pub use crate::text::TextExt as _;
 }
 
