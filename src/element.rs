@@ -1,8 +1,6 @@
-use web_sys::wasm_bindgen::JsCast;
 use web_sys::Node;
 
 pub trait ElementExt {
-    fn create() -> Self where Self: JsCast + Sized + Clone;
     fn child(&self, child: impl AsRef<Node>) -> &Self
     where
         Self: AsRef<Node>,
@@ -20,7 +18,7 @@ pub mod tests {
 
     #[wasm_bindgen_test]
     fn test_element() {
-        let b = HtmlButtonElement::create();
-        HtmlDivElement::create().child(b);
+        let b = HtmlButtonElement::create_button();
+        HtmlDivElement::create_div().child(b);
     }
 }
