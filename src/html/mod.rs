@@ -1,3 +1,4 @@
+pub mod input;
 pub trait HtmlElementExt {}
 
 impl<T: AsRef<web_sys::HtmlElement>> HtmlElementExt for T {}
