@@ -3,7 +3,7 @@ members = ["examples/counter"]
 
 [package]
 name = "wext"
-version = "0.3.1"
+version = "0.4.0"
 edition = "2021"
 authors = ["Florian Uekermann <florian@uekermann.me>"]
 description = "web-sys extension traits, convenience functions and types"
@@ -14,7 +14,7 @@ documentation = "https://docs.rs/wext"
 [dependencies]
 gloo = "0.11.0"
 web-sys = { version = "0.3.68", features = [
-    "Document", "Text",
+    "Document", "Text", "DomTokenList",
     "HtmlAnchorElement","HtmlAreaElement","HtmlAudioElement","HtmlBaseElement","HtmlBodyElement","HtmlBrElement","HtmlButtonElement","HtmlCanvasElement","HtmlDListElement","HtmlDataElement","HtmlDataListElement","HtmlDetailsElement","HtmlDialogElement","HtmlDivElement","HtmlElement","HtmlEmbedElement","HtmlFieldSetElement","HtmlFontElement","HtmlFormElement","HtmlFrameElement","HtmlFrameSetElement","HtmlHeadElement","HtmlHeadingElement","HtmlHrElement","HtmlHtmlElement","HtmlIFrameElement","HtmlImageElement","HtmlInputElement","HtmlLabelElement","HtmlLegendElement","HtmlLiElement","HtmlLinkElement","HtmlMapElement","HtmlMediaElement","HtmlMenuElement","HtmlMetaElement","HtmlMeterElement","HtmlModElement","HtmlOListElement","HtmlObjectElement","HtmlOptGroupElement","HtmlOptionElement","HtmlOutputElement","HtmlParagraphElement","HtmlParamElement","HtmlPictureElement","HtmlPreElement","HtmlProgressElement","HtmlQuoteElement","HtmlScriptElement","HtmlSelectElement","HtmlSlotElement","HtmlSourceElement","HtmlSpanElement","HtmlStyleElement","HtmlTableCaptionElement","HtmlTableCellElement","HtmlTableColElement","HtmlTableElement","HtmlTableRowElement","HtmlTableSectionElement","HtmlTemplateElement","HtmlTextAreaElement","HtmlTimeElement","HtmlTitleElement","HtmlTrackElement","HtmlUListElement","HtmlVideoElement",
 ] }
 paste = "1.0.14"
