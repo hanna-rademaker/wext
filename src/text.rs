@@ -3,8 +3,6 @@ pub trait TextExt {
     fn text(&self, s: impl AsRef<str>);
 }
 
-impl crate::node::NodeExt for web_sys::Text {}
-
 impl TextExt for web_sys::Text {
     fn create(s: impl AsRef<str>) -> Self {
         gloo::utils::document().create_text_node(s.as_ref())

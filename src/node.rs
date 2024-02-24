@@ -25,6 +25,8 @@ pub trait NodeExt: AsRef<web_sys::Node> {
     }
 }
 
+impl<T: AsRef<web_sys::Node>> NodeExt for T {}
+
 #[cfg(test)]
 pub mod tests {
     use crate::prelude::*;

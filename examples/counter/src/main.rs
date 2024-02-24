@@ -42,15 +42,11 @@ fn main() {
         let mut els = Vec::new();
         let weak_clone = weak.clone();
         els.push(EventListener::new(&inc, "click", move |_| {
-            if let Some(state) = weak_clone.upgrade() {
-                state.borrow_mut().process(true)
-            }
+            weak_clone.upgrade().unwrap().borrow_mut().process(true)
         }));
         let weak_clone = weak.clone();
         els.push(EventListener::new(&dec, "click", move |_| {
-            if let Some(state) = weak_clone.upgrade() {
-                state.borrow_mut().process(false)
-            }
+            weak_clone.upgrade().unwrap().borrow_mut().process(false)
         }));
 
         RefCell::new(State { count: 0, info, _els: els })
