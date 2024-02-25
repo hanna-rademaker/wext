@@ -1,4 +1,5 @@
 pub mod element;
+pub(crate) mod element_macros;
 pub mod html;
 pub mod node;
 pub mod svg;
