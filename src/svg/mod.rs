@@ -1,8 +1,21 @@
-pub trait HtmlElementExt {}
+pub trait SvgElementExt {
+    fn create(tag: impl AsRef<str>) -> Self
+    where
+        Self: Sized + web_sys::wasm_bindgen::JsCast,
+    {
+        use web_sys::wasm_bindgen::JsCast;
+        gloo::utils::document()
+            .create_element_ns(Some("http://www.w3.org/2000/svg"), tag.as_ref())
+            .unwrap()
+            .dyn_into()
+            .unwrap()
+    }
+}
 
-impl<T: AsRef<web_sys::HtmlElement>> HtmlElementExt for T {}
+impl<T: AsRef<web_sys::SvgElement>> SvgElementExt for T {}
 
-pub(crate) const NS: &'static str = "http://www.w3.org/2000/svg";
+pub(crate) type ThisBase = web_sys::SvgElement;
+pub(crate) use SvgElementExt as ThisExt;
 
 crate::element_macros::impls!(
 SvgElement : ;

@@ -23,8 +23,8 @@ macro_rules! impl_create_ext {
     (fns -> $tag:ident $($flag:literal)?) => {
         paste::paste!{
             fn [< create_ $tag:snake >] () -> Self {
-                use super::NS;
-                gloo::utils::document().create_element_ns(Some(NS), stringify!($tag)).unwrap().dyn_into().unwrap()
+                use super::ThisExt;
+                super::ThisBase::create(stringify!($tag)).dyn_into().unwrap()
             }
         }
     };
