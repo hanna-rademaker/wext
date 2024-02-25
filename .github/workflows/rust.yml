@@ -24,3 +24,4 @@ jobs:
       - run: wasm-pack test --firefox --headless
       - run: cargo install trunk
       - run: (cd examples/counter && trunk build)
+      - run: (cd examples/svg && trunk build)

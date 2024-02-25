@@ -1,9 +1,8 @@
-pub mod input;
 pub trait HtmlElementExt {}
 
 impl<T: AsRef<web_sys::HtmlElement>> HtmlElementExt for T {}
 
-pub(crate) const NS: &'static str = "http://www.w3.org/1999/xhtml";
+pub(crate) const NS: &'static str = "http://www.w3.org/2000/svg";
 
 macro_rules! impls {
     ($($names:ident : $( $tagss:ident $($flagss:literal)? ),* );+) => {
@@ -89,71 +88,75 @@ macro_rules! impl_short_fn {
 }
 
 impls!(
-HtmlElement : dd;
-HtmlAnchorElement : a;
-HtmlAreaElement : area;
-HtmlAudioElement : audio;
-HtmlBaseElement : base;
-HtmlBodyElement : body false;
-HtmlBrElement : br;
-HtmlButtonElement : button;
-HtmlCanvasElement : canvas;
-HtmlDListElement : dl;
-HtmlDataElement : data;
-HtmlDataListElement : datalist;
-HtmlDetailsElement : details;
-HtmlDialogElement : dialog;
-HtmlDivElement : div;
-HtmlEmbedElement : embed;
-HtmlFieldSetElement : fieldset;
-HtmlFontElement : font;
-HtmlFormElement : form;
-HtmlFrameElement : frame;
-HtmlFrameSetElement : frameset;
-HtmlHeadElement : head;
-HtmlHeadingElement : h1, h2, h3, h4, h5, h6;
-HtmlHrElement : hr;
-HtmlHtmlElement : html false;
-HtmlIFrameElement : iframe;
-HtmlImageElement : img;
-HtmlInputElement : input;
-HtmlLabelElement : label;
-HtmlLegendElement : legend;
-HtmlLiElement : li;
-HtmlLinkElement : link;
-HtmlMapElement : map;
-HtmlMediaElement : ;
-HtmlMenuElement : menu;
-HtmlMetaElement : meta;
-HtmlMeterElement : meter;
-HtmlOListElement : ol;
-HtmlObjectElement : object;
-HtmlOptGroupElement : optgroup;
-HtmlOptionElement : option;
-HtmlOutputElement : output;
-HtmlParagraphElement : p;
-HtmlParamElement : param;
-HtmlPictureElement : picture;
-HtmlPreElement : pre;
-HtmlProgressElement : progress;
-HtmlQuoteElement : q, blockquote;
-HtmlScriptElement : script;
-HtmlSelectElement : select;
-HtmlSlotElement : slot;
-HtmlSourceElement : source;
-HtmlSpanElement : span;
-HtmlStyleElement : style;
-HtmlTableCaptionElement : caption;
-HtmlTableCellElement : td, th;
-HtmlTableColElement : col, colgroup;
-HtmlTableElement : table;
-HtmlTableRowElement : tr;
-HtmlTableSectionElement : thead, tfoot, tbody;
-HtmlTemplateElement : template;
-HtmlTextAreaElement : textarea;
-HtmlTimeElement : time;
-HtmlTitleElement : title;
-HtmlTrackElement : track;
-HtmlUListElement : ul;
-HtmlVideoElement : video
+SvgElement : ;
+SvgAnimateElement : animate;
+SvgAnimateMotionElement : animateMotion;
+SvgAnimateTransformElement : animateTransform;
+SvgAnimationElement : ;
+SvgCircleElement : circle;
+SvgClipPathElement : clipPath;
+SvgComponentTransferFunctionElement : ;
+SvgDefsElement : defs;
+SvgDescElement : desc;
+SvgEllipseElement : ellipse;
+SvgFilterElement : filter;
+SvgForeignObjectElement : foreignObject;
+SvgGeometryElement : ;
+SvgGradientElement : ;
+SvgGraphicsElement : ;
+SvgImageElement : image;
+SvgLineElement : line;
+SvgLinearGradientElement : linearGradient;
+SvgMarkerElement : marker;
+SvgMaskElement : mask;
+SvgMetadataElement : metadata;
+SvgPathElement : path;
+SvgPatternElement : pattern;
+SvgPolygonElement : polygon;
+SvgPolylineElement : polyline;
+SvgRadialGradientElement : radialGradient;
+SvgRectElement : rect;
+SvgScriptElement : script;
+SvgSetElement : set;
+SvgStopElement : stop;
+SvgStyleElement : style;
+SvgSwitchElement : switch;
+SvgSymbolElement : symbol;
+SvgTextContentElement : ;
+SvgTextElement : text;
+SvgTextPathElement : textPath;
+SvgTextPositioningElement : ;
+SvgTitleElement : title;
+SvgUseElement : use false; //TODO: waiting for https://github.com/dtolnay/paste/issues/74.
+SvgViewElement : view;
+SvgaElement : a;
+SvgfeBlendElement : feBlend;
+SvgfeColorMatrixElement : feColorMatrix;
+SvgfeComponentTransferElement : feComponentTransfer;
+SvgfeCompositeElement : feComposite;
+SvgfeConvolveMatrixElement : feConvolveMatrix;
+SvgfeDiffuseLightingElement : feDiffuseLighting;
+SvgfeDisplacementMapElement : feDisplacementMap;
+SvgfeDistantLightElement : feDistantLight;
+SvgfeDropShadowElement : feDropShadow;
+SvgfeFloodElement : feFlood;
+SvgfeFuncAElement : feFuncA;
+SvgfeFuncBElement : feFuncB;
+SvgfeFuncGElement : feFuncG;
+SvgfeFuncRElement : feFuncR;
+SvgfeGaussianBlurElement : feGaussianBlur;
+SvgfeImageElement : feImage;
+SvgfeMergeElement : feMerge;
+SvgfeMergeNodeElement : feMergeNode;
+SvgfeMorphologyElement : feMorphology;
+SvgfeOffsetElement : feOffset;
+SvgfePointLightElement : fePointLight;
+SvgfeSpecularLightingElement : feSpecularLighting;
+SvgfeSpotLightElement : feSpotLight;
+SvgfeTileElement : feTile;
+SvgfeTurbulenceElement : feTurbulence;
+SvggElement : g;
+SvgmPathElement : mpath;
+SvgsvgElement : svg;
+SvgtSpanElement : tspan
 );

@@ -580,6 +580,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "svg"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "gloo",
+ "log",
+ "wasm-bindgen-console-logger",
+ "web-sys",
+ "wext",
+]
+
+[[package]]
 name = "syn"
 version = "2.0.50"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -752,7 +764,7 @@ dependencies = [
 
 [[package]]
 name = "wext"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "gloo",
  "paste",

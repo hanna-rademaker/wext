@@ -1,6 +1,7 @@
 pub mod element;
 pub mod html;
 pub mod node;
+pub mod svg;
 pub mod text;
 
 pub mod prelude {
