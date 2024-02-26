@@ -3,7 +3,7 @@ members = ["examples/counter", "examples/svg"]
 
 [package]
 name = "wext"
-version = "0.4.1"
+version = "0.5.0"
 edition = "2021"
 authors = ["Florian Uekermann <florian@uekermann.me>"]
 description = "web-sys extension traits, convenience functions and types"

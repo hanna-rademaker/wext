@@ -1,8 +1,8 @@
-pub trait NodeExt: AsRef<web_sys::Node> {
+pub trait NodeExt: AsRef<web_sys::Node> + Clone {
     /// shorthand for `self.append_child(&child).unwrap()`
-    fn child(&self, child: impl AsRef<web_sys::Node>) -> &Self {
+    fn child(&self, child: impl AsRef<web_sys::Node>) -> Self {
         self.as_ref().append_child(child.as_ref()).unwrap();
-        self
+        self.clone()
     }
     /// removes all child nodes
     fn clear(&self) {
@@ -25,7 +25,7 @@ pub trait NodeExt: AsRef<web_sys::Node> {
     }
 }
 
-impl<T: AsRef<web_sys::Node>> NodeExt for T {}
+impl<T: AsRef<web_sys::Node> + Clone> NodeExt for T {}
 
 #[cfg(test)]
 pub mod tests {

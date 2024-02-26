@@ -34,8 +34,8 @@ fn main() {
     body().child(h1().child(text!("Counter")));
 
     let state = Rc::<RefCell<State>>::new_cyclic(|weak| {
-        let inc = button().child(text!("+1")).clone();
-        let dec = button().child(text!("-1")).clone();
+        let inc = button().child(text!("+1"));
+        let dec = button().child(text!("-1"));
         let info = text!("0");
         body().child(&dec).child(&inc).child(p().child(text!("Count: ")).child(&info));
 
