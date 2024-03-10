@@ -9,6 +9,14 @@ pub trait ElementExt: AsRef<web_sys::Element> + Clone {
         self.as_ref().set_attribute(name.as_ref(), value.as_ref()).unwrap();
         self.clone()
     }
+    /// Set or unset boolean attribute `name`
+    fn battr(&self, name: impl AsRef<str>, value: bool) -> Self {
+        match value {
+            true => self.as_ref().set_attribute(name.as_ref(), "").unwrap(),
+            false => self.as_ref().remove_attribute(name.as_ref()).unwrap(),
+        }
+        self.clone()
+    }
 }
 
 impl<T: AsRef<web_sys::Element> + Clone> ElementExt for T {}
