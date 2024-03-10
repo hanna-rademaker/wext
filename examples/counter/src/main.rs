@@ -40,14 +40,8 @@ fn main() {
         body().child(&dec).child(&inc).child(p().child(text!("Count: ")).child(&info));
 
         let mut els = Vec::new();
-        let weak_clone = weak.clone();
-        els.push(EventListener::new(&inc, "click", move |_| {
-            weak_clone.upgrade().unwrap().borrow_mut().process(true)
-        }));
-        let weak_clone = weak.clone();
-        els.push(EventListener::new(&dec, "click", move |_| {
-            weak_clone.upgrade().unwrap().borrow_mut().process(false)
-        }));
+        els.push(weak.event_listener(&inc, "click", |state, _| state.process(true)));
+        els.push(weak.event_listener(&dec, "click", |state, _| state.process(false)));
 
         RefCell::new(State { count: 0, info, _els: els })
     });

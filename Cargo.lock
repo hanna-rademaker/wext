@@ -764,9 +764,10 @@ dependencies = [
 
 [[package]]
 name = "wext"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "gloo",
+ "log",
  "paste",
  "wasm-bindgen-test",
  "web-sys",
