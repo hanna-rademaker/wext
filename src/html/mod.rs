@@ -1,8 +1,8 @@
 pub mod input;
-pub trait HtmlElementExt {
+pub trait HtmlElementExt: AsRef<web_sys::HtmlElement> + Clone {
     fn create(tag: impl AsRef<str>) -> Self
     where
-        Self: Sized + web_sys::wasm_bindgen::JsCast,
+        Self: web_sys::wasm_bindgen::JsCast,
     {
         use web_sys::wasm_bindgen::JsCast;
         gloo::utils::document()
@@ -11,9 +11,13 @@ pub trait HtmlElementExt {
             .dyn_into()
             .unwrap()
     }
+    fn css(&self, property: impl AsRef<str>, value: impl AsRef<str>) -> Self {
+        self.as_ref().style().set_property(property.as_ref(), value.as_ref()).unwrap();
+        self.clone()
+    }
 }
 
-impl<T: AsRef<web_sys::HtmlElement>> HtmlElementExt for T {}
+impl<T: AsRef<web_sys::HtmlElement> + Clone> HtmlElementExt for T {}
 
 pub(crate) type ThisBase = web_sys::HtmlElement;
 pub(crate) use HtmlElementExt as ThisExt;

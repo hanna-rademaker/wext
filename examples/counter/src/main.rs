@@ -31,7 +31,7 @@ fn main() {
     log::set_logger(&wasm_bindgen_console_logger::DEFAULT_LOGGER).unwrap();
     log::set_max_level(log::LevelFilter::Info);
 
-    body().child(h1().child(text!("Counter")));
+    body().child(h1().child(text!("Counter")).css("color", "grey"));
 
     let state = Rc::<RefCell<State>>::new_cyclic(|weak| {
         let inc = button().child(text!("+1"));

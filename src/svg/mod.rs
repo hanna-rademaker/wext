@@ -1,4 +1,4 @@
-pub trait SvgElementExt {
+pub trait SvgElementExt: AsRef<web_sys::SvgElement> + Clone {
     fn create(tag: impl AsRef<str>) -> Self
     where
         Self: Sized + web_sys::wasm_bindgen::JsCast,
@@ -10,9 +10,13 @@ pub trait SvgElementExt {
             .dyn_into()
             .unwrap()
     }
+    fn css(&self, property: impl AsRef<str>, value: impl AsRef<str>) -> Self {
+        self.as_ref().style().set_property(property.as_ref(), value.as_ref()).unwrap();
+        self.clone()
+    }
 }
 
-impl<T: AsRef<web_sys::SvgElement>> SvgElementExt for T {}
+impl<T: AsRef<web_sys::SvgElement> + Clone> SvgElementExt for T {}
 
 pub(crate) type ThisBase = web_sys::SvgElement;
 pub(crate) use SvgElementExt as ThisExt;

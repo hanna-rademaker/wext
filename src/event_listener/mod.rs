@@ -6,12 +6,9 @@ pub trait EventListenerExt {
 
 impl EventListenerExt for gloo::events::EventListener {
     fn prevent_default(target: &web_sys::EventTarget, event_type: impl Into<std::borrow::Cow<'static, str>>) -> Self {
-        gloo::events::EventListener::new_with_options(
-            target,
-            event_type,
-            gloo::events::EventListenerOptions::enable_prevent_default(),
-            |e| e.prevent_default(),
-        )
+        gloo::events::EventListener::new_with_options(target, event_type, gloo::events::EventListenerOptions::enable_prevent_default(), |e| {
+            e.prevent_default()
+        })
     }
 }
 

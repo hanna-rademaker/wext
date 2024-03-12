@@ -13,7 +13,7 @@ fn main() {
         svg()
             .attr("width", "150")
             .attr("height", "150")
-            .child(rect().attr("width", "150").attr("height", "150").attr("fill", "blue"))
+            .child(rect().attr("width", "150").attr("height", "150").css("fill", "green"))
             .child(circle().attr("cx", "75").attr("cy", "75").attr("r", "50").attr("fill", "orange")),
     );
 }
