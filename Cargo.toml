@@ -3,7 +3,7 @@ members = ["examples/counter", "examples/svg"]
 
 [package]
 name = "wext"
-version = "0.6.0"
+version = "0.6.1"
 edition = "2021"
 authors = ["Florian Uekermann <florian@uekermann.me>"]
 description = "web-sys extension traits, convenience functions and types"
@@ -20,6 +20,7 @@ web-sys = { version = "0.3.68", features = [
 ] }
 paste = "1.0.14"
 log = "0.4"
+wasm-bindgen-futures = "0.4"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.0"

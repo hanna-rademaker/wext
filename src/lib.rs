@@ -1,3 +1,4 @@
+pub mod callback;
 pub mod element;
 pub(crate) mod element_macros;
 pub mod event_listener;
