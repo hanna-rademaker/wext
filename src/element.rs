@@ -9,6 +9,12 @@ pub trait ElementExt: AsRef<web_sys::Element> + Clone {
         self.as_ref().set_attribute(name.as_ref(), value.as_ref()).unwrap();
         self.clone()
     }
+    /// Set the attribute `name` to the specified integer value
+    fn iattr(&self, name: impl AsRef<str>, value: impl Into<i32>) -> Self {
+        let s = value.into().to_string();
+        self.as_ref().set_attribute(name.as_ref(), &s).unwrap();
+        self.clone()
+    }
     /// Set or unset boolean attribute `name`
     fn battr(&self, name: impl AsRef<str>, value: bool) -> Self {
         match value {
