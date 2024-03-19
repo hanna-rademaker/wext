@@ -4,6 +4,16 @@ pub trait ElementExt: AsRef<web_sys::Element> + Clone {
         self.as_ref().class_list().add_1(c.as_ref()).unwrap();
         self.clone()
     }
+    /// Set whether `c` is in the class list
+    fn bclass(&self, c: impl AsRef<str>, value: bool) -> Self {
+        let classes = self.as_ref().class_list();
+        let c = c.as_ref();
+        match value {
+            true => classes.add_1(c).unwrap(),
+            false => classes.remove_1(c).unwrap(),
+        }
+        self.clone()
+    }
     /// Set the attribute `name` to the specified value
     fn attr(&self, name: impl AsRef<str>, value: impl AsRef<str>) -> Self {
         self.as_ref().set_attribute(name.as_ref(), value.as_ref()).unwrap();

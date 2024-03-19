@@ -15,6 +15,17 @@ pub trait HtmlElementExt: AsRef<web_sys::HtmlElement> + Clone {
         self.as_ref().style().set_property(property.as_ref(), value.as_ref()).unwrap();
         self.clone()
     }
+    fn ocss(&self, property: impl AsRef<str>, value: Option<&str>) -> Self {
+        let style = self.as_ref().style();
+        let property = property.as_ref();
+        match value {
+            None => {
+                style.remove_property(property).unwrap();
+            }
+            Some(v) => style.set_property(property, v).unwrap(),
+        }
+        self.clone()
+    }
 }
 
 impl<T: AsRef<web_sys::HtmlElement> + Clone> HtmlElementExt for T {}
