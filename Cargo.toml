@@ -1,9 +1,9 @@
 [workspace]
-members = ["examples/counter", "examples/svg"]
+members = ["examples/counter", "examples/svg", "examples/callback"]
 
 [package]
 name = "wext"
-version = "0.6.3"
+version = "0.7.0"
 edition = "2021"
 authors = ["Florian Uekermann <florian@uekermann.me>"]
 description = "web-sys extension traits, convenience functions and types"

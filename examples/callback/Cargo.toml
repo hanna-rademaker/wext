@@ -1,5 +1,5 @@
 [package]
-name = "svg"
+name = "callback"
 version = "0.1.0"
 edition = "2021"
 
@@ -10,3 +10,4 @@ gloo = "0.11.0"
 log = "0.4.20"
 wext = { path="../.." }
 web-sys = "0.3.68"
+wasm-bindgen-futures = "0.4.42"

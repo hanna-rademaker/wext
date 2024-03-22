@@ -8,6 +8,8 @@ pub mod svg;
 pub mod text;
 
 pub mod prelude {
+    pub use crate::callback::RcRefCellCallbackExt as _;
+    pub use crate::callback::WeakRcRefCellCallbackExt as _;
     pub use crate::callback::WeakRcRefCellCallbackExt as _;
     pub use crate::element::ElementExt as _;
     pub use crate::event_listener::EventListenerExt as _;
