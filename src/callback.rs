@@ -39,6 +39,9 @@ pub trait WeakRcRefCellCallbackExt<T> {
     fn queue<C>(&self, callback: C)
     where
         C: FnMut(&mut T) + 'static;
+    fn callback<C>(&self, callback: C) -> Box<dyn Fn()>
+    where
+        C: FnMut(&mut T) + 'static;
 }
 
 impl<T: 'static> WeakRcRefCellCallbackExt<T> for std::rc::Rc<std::cell::RefCell<T>> {
@@ -55,6 +58,13 @@ impl<T: 'static> WeakRcRefCellCallbackExt<T> for std::rc::Rc<std::cell::RefCell<
         C: FnMut(&mut T) + 'static,
     {
         std::rc::Rc::downgrade(self).queue(callback)
+    }
+
+    fn callback<C>(&self, callback: C) -> Box<dyn Fn()>
+    where
+        C: FnMut(&mut T) + 'static,
+    {
+        std::rc::Rc::downgrade(self).callback(callback)
     }
 }
 
@@ -76,6 +86,25 @@ impl<T: 'static> WeakRcRefCellCallbackExt<T> for std::rc::Weak<std::cell::RefCel
         C: FnMut(&mut T) + 'static,
     {
         self.await_queue(async {}, move |r, ()| callback(r))
+    }
+
+    fn callback<C>(&self, callback: C) -> Box<dyn Fn()>
+    where
+        C: FnMut(&mut T) + 'static,
+    {
+        let weak = self.clone();
+        let callback = std::rc::Rc::new(std::cell::RefCell::new(callback));
+        Box::new(move || {
+            let callback = callback.clone();
+            weak.queue(move |this| try_run_ref_cell_fn(this, &callback))
+        })
+    }
+}
+
+fn try_run_ref_cell_fn<T, F: FnMut(&mut T) + 'static>(this: &mut T, f: &std::rc::Rc<std::cell::RefCell<F>>) {
+    match f.try_borrow_mut() {
+        Ok(mut guard) => guard(this),
+        Err(_) => log::warn!("already borrowed callback triggered (maybe due to a leak or panic)"),
     }
 }
 

@@ -4,6 +4,11 @@ pub trait NodeExt: AsRef<web_sys::Node> + Clone {
         self.as_ref().append_child(child.as_ref()).unwrap();
         self.clone()
     }
+    /// sets
+    fn txt<'a>(&self, text: impl Into<Option<&'a str>>) -> Self {
+        self.as_ref().set_text_content(text.into());
+        self.clone()
+    }
     /// removes all child nodes
     fn clear(&self) {
         let node = self.as_ref();
