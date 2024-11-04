@@ -2,14 +2,14 @@ use gloo::events::EventListener;
 use gloo::utils::body;
 use std::cell::RefCell;
 use std::rc::Rc;
-use web_sys::Text;
+use web_sys::Node;
 use wext::html::short::*;
 use wext::prelude::*;
 use wext::text::text;
 
 struct State {
     count: u8,
-    info: Text,
+    info: Node,
     _els: Vec<EventListener>,
 }
 
@@ -31,13 +31,13 @@ fn main() {
     log::set_logger(&wasm_bindgen_console_logger::DEFAULT_LOGGER).unwrap();
     log::set_max_level(log::LevelFilter::Info);
 
-    body().child(h1().txt("Counter").css("color", "grey"));
+    body().child(&h1().txt("Counter").css("color", "grey"));
 
     let state = Rc::<RefCell<State>>::new_cyclic(|weak| {
         let inc = button().txt("+1");
         let dec = button().txt("-1");
         let info = text!("0");
-        body().child(&dec).child(&inc).child(p().child(text!("Count: ")).child(&info));
+        body().child(&dec).child(&inc).child(&p().child(&text!("Count: ")).child(&info));
 
         let mut els = Vec::new();
         els.push(weak.event_listener(&inc, "click", |state, _| state.process(true)));

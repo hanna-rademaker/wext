@@ -12,7 +12,7 @@ struct ComponentA {
 
 impl ComponentA {
     fn new(parent: &Node) -> Rc<RefCell<Self>> {
-        let div = div().css("border", "solid 3px black").child(h2().txt("ComponentA"));
+        let div = div().css("border", "solid 3px black").child(&h2().txt("ComponentA"));
         parent.child(&div);
         Rc::new(RefCell::new(Self { div }))
     }
@@ -30,7 +30,7 @@ impl ComponentB {
     fn new(parent: &Node, component_b: Rc<RefCell<ComponentA>>) -> Rc<RefCell<Self>> {
         Rc::<RefCell<Self>>::new_cyclic(|weak| {
             let button = button().txt("set random color");
-            let div = div().css("border", "solid 3px black").child(h2().txt("ComponentB")).child(&button);
+            let div = div().css("border", "solid 3px black").child(&h2().txt("ComponentB")).child(&button);
             parent.child(&div);
             weak.event_listener(&button, "click", move |this, _| {
                 let colors = ["red", "green", "blue", "pink", "brown"];
