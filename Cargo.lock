@@ -636,6 +636,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "todo"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "gloo",
+ "log",
+ "wasm-bindgen-console-logger",
+ "web-sys",
+ "wext",
+]
+
+[[package]]
 name = "toml_datetime"
 version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"

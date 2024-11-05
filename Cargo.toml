@@ -1,5 +1,5 @@
 [workspace]
-members = ["examples/counter", "examples/svg", "examples/callback"]
+members = ["examples/counter", "examples/svg", "examples/callback", "examples/todo"]
 
 [package]
 name = "wext"
