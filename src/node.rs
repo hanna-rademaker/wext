@@ -1,6 +1,6 @@
 pub trait NodeExt: AsRef<web_sys::Node> + Clone {
     /// shorthand for `self.append_child(&child).unwrap()`
-    fn child(&self, child: impl AsRef<web_sys::Node>) -> Self {
+    fn child(&self, child: &web_sys::Node) -> Self {
         self.as_ref().append_child(child.as_ref()).unwrap();
         self.clone()
     }
@@ -41,6 +41,6 @@ pub mod tests {
     #[wasm_bindgen_test]
     fn test_element() {
         let b = HtmlButtonElement::create_button();
-        HtmlDivElement::create_div().child(b);
+        HtmlDivElement::create_div().child(&b);
     }
 }

@@ -15,8 +15,10 @@ impl TextExt for web_sys::Text {
 #[macro_export]
 macro_rules! text {
     ($($arg:tt)*) => {{
+        use web_sys::Node;
         let s = format!($($arg)*);
-        web_sys::Text::create(s)
+        let n: Node = web_sys::Text::create(s).into();
+        n
     }}
 }
 pub use text;
