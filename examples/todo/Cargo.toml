@@ -10,3 +10,4 @@ gloo = "0.11.0"
 log = "0.4.20"
 wext = { path="../.." }
 web-sys = "0.3.68"
+uuid = { version = "1.11.0", features = ["v4"] }
