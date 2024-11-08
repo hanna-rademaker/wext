@@ -1,34 +1,42 @@
-use std::{cell::RefCell, rc::Rc};
+use std::{
+    cell::RefCell,
+    rc::{Rc, Weak},
+};
 
 use gloo::{events::EventListener, utils::body};
-use web_sys::HtmlDivElement;
+use uuid::Uuid;
+use web_sys::{HtmlDivElement, HtmlInputElement};
 use wext::{
-    html::short::{div, form, h1, input, p},
+    html::short::{button, div, form, h1, input, p},
+    node::NodeExt,
     prelude::*,
 };
 
-#[derive(Debug)]
 struct Item {
     root: HtmlDivElement,
-    todo: String,
-    done: bool,
+    _checkbox: HtmlInputElement,
+    delete_callback: Box<dyn Fn()>,
     _els: Vec<EventListener>,
 }
 
 impl Item {
-    fn new(todo: String) -> Rc<RefCell<Self>> {
+    fn new(todo: String, delete_callback: Box<dyn Fn()>) -> Rc<RefCell<Self>> {
         Rc::<RefCell<Item>>::new_cyclic(|weak| {
             let root = div();
             let checkbox = input().attr("type", "checkbox");
-            root.child(&div().child(&checkbox).child(&p().txt(todo.as_str())));
+            let delete_button = button().txt("delete");
+            root.child(&div().child(&checkbox).child(&p().txt(todo.as_str())).child(&delete_button));
             let mut els = Vec::new();
             els.push(weak.event_listener(&checkbox, "change", |this, _| {
                 this.update();
             }));
+            els.push(weak.event_listener(&delete_button, "click", |this, _| {
+                (this.delete_callback)();
+            }));
             RefCell::new(Self {
                 root,
-                todo,
-                done: false,
+                _checkbox: checkbox,
+                delete_callback,
                 _els: els,
             })
         })
@@ -37,14 +45,15 @@ impl Item {
 }
 
 struct State {
-    todo_list: Vec<Rc<RefCell<Item>>>,
+    weak: Weak<RefCell<Self>>,
+    todo_list: Vec<(Uuid, Rc<RefCell<Item>>)>,
     container: HtmlDivElement,
     _els: Vec<EventListener>,
 }
 
 impl State {
     fn new() -> Rc<RefCell<Self>> {
-        let state = Rc::<RefCell<State>>::new_cyclic(|weak| {
+        Rc::<RefCell<State>>::new_cyclic(|weak| {
             let form = form();
             let input_field = input();
             form.child(&input_field);
@@ -53,22 +62,29 @@ impl State {
             let mut els = Vec::new();
             els.push(weak.event_listener(&form, "submit", move |state, e| {
                 e.prevent_default();
-                let item = Item::new(input_field.value());
-                state.todo_list.push(item);
+                let uuid = Uuid::new_v4();
+                let item = Item::new(
+                    input_field.value(),
+                    state.weak.callback(move |state| {
+                        state.todo_list.retain(|(id, _)| id != &uuid);
+                        state.update();
+                    }),
+                );
+                state.todo_list.push((uuid, item));
                 input_field.set_value("");
                 state.update();
             }));
             RefCell::new(State {
+                weak: weak.clone(),
                 todo_list: Vec::new(),
                 container,
                 _els: els,
             })
-        });
-        state
+        })
     }
     fn update(&self) {
         self.container.clear();
-        for item in &self.todo_list {
+        for (_, item) in &self.todo_list {
             let item = item.borrow();
             self.container.child(&item.root);
         }
