@@ -1,0 +1,61 @@
+.root {
+    margin: auto;
+    width: 550px;
+    text-align: center;
+    font-size: 24px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1.title {
+    color: #b83f45;
+    display: block;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 200;
+}
+
+.input-field {
+    font-size: 24px;
+    width: 100%;
+}
+
+div.item {
+    display: flex;
+    height: 60px;
+
+    p {
+        margin: auto 0;
+    }
+}
+
+.footer {
+    span.counter {
+        font-size: 15px;
+    }
+    div.filter.all {
+        button {
+            border-color: black;
+        }
+        button.all {
+            border-color: #b83f45;
+        }
+    }
+    div.filter.active {
+        button {
+            border-color: black;
+        }
+        button.active {
+            border-color: #b83f45;
+        }
+    }
+    div.filter.completed {
+        button {
+            border-color: black;
+        }
+        button.completed {
+            border-color: #b83f45;
+        }
+    }
+
+
+}
