@@ -1,11 +1,17 @@
-use std::{cell::RefCell, rc::{Rc, Weak}};
+use std::{
+    cell::RefCell,
+    rc::{Rc, Weak},
+};
 
 use crate::item::Item;
 
 use gloo::{events::EventListener, utils::body};
 use uuid::Uuid;
 use web_sys::{HtmlDivElement, HtmlSpanElement};
-use wext::{html::short::{button, div, form, h1, input, span}, prelude::*};
+use wext::{
+    html::short::{button, div, form, h1, input, span},
+    prelude::*,
+};
 
 enum Filter {
     All,

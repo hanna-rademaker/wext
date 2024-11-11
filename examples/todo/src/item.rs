@@ -2,7 +2,10 @@ use std::{cell::RefCell, rc::Rc};
 
 use gloo::events::EventListener;
 use web_sys::{HtmlDivElement, HtmlInputElement};
-use wext::{html::short::{button, div, input, p}, prelude::*};
+use wext::{
+    html::short::{button, div, input, p},
+    prelude::*,
+};
 
 pub struct Item {
     pub root: HtmlDivElement,
