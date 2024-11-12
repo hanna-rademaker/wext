@@ -1,0 +1,6 @@
+[book]
+authors = ["Hanna Rademaker"]
+language = "en"
+multilingual = false
+src = "src"
+title = "wext"
